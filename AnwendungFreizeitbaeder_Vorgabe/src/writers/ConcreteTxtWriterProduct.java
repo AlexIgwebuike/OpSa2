@@ -12,7 +12,7 @@ public class ConcreteTxtWriterProduct extends WriterProduct {
 	
 	public ConcreteTxtWriterProduct() {
 		try {
-			aus = new BufferedWriter(new FileWriter("Freizeitbaeder.csv", true));
+			aus = new BufferedWriter(new FileWriter("Freizeitbaeder.txt", true));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
