@@ -21,7 +21,11 @@ public class ConcreteTxtWriterProduct extends WriterProduct {
 	
 		
 	public void fuegeInDateiHinzu(Freizeitbad freizeitbad) throws IOException{
-		this.aus.write(freizeitbad.gibFreizeitbadZurueck(';'));
+		this.aus.write("Daten des Freizeitbades"
+					+ "\nName des Freizeitbads:              " + freizeitbad.getName()
+					+ "\nÖffnungszeit des Freizeitbads:       " + freizeitbad.getGeoeffnetVon() + " - " + freizeitbad.getGeoeffnetBis()
+					+ "\nBeckenlänge des Freizeitbads:        " + freizeitbad.getBeckenlaenge()
+					+ "\nWasasertemperatur des Freizeitbads:  " + freizeitbad.getTemperatur());
 		this.aus.close();
 	}
 		
