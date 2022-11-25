@@ -21,10 +21,10 @@ public class ConcreteCsvWriterProduct extends WriterProduct {
 	
 	public void fuegeInDateiHinzu(Freizeitbad freizeitbad) throws IOException{
 		this.aus.write(freizeitbad.gibFreizeitbadZurueck(';'));
-		this.aus.close();
+		schliesseDatei();
 	}
 	
 	public void schliesseDatei() throws IOException{
-		aus.close();
+		this.aus.close();
 	}
 }

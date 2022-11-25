@@ -26,11 +26,11 @@ public class ConcreteTxtWriterProduct extends WriterProduct {
 					+ "\nÖffnungszeit des Freizeitbads:       " + freizeitbad.getGeoeffnetVon() + " - " + freizeitbad.getGeoeffnetBis()
 					+ "\nBeckenlänge des Freizeitbads:        " + freizeitbad.getBeckenlaenge()
 					+ "\nWasasertemperatur des Freizeitbads:  " + freizeitbad.getTemperatur());
-		this.aus.close();
+		schliesseDatei();
 	}
 		
 	public void schliesseDatei() throws IOException{
-		aus.close();
+		this.aus.close();
 	}
 		
 }
