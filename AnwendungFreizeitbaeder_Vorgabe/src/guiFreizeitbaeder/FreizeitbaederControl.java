@@ -1,4 +1,4 @@
-package gui;
+package guiFreizeitbaeder;
 
 import java.io.IOException;
 
@@ -11,8 +11,9 @@ public class FreizeitbaederControl {
 	private FreizeitbaederModel fzModel;
 
 	public FreizeitbaederControl(Stage primaryStage){
-		this.fzModel = new FreizeitbaederModel();
-		this.fzView = new FreizeitbaederView(primaryStage, this,fzModel);
+		
+		this.fzModel = fzModel.getInstance();
+		this.fzView = new FreizeitbaederView(primaryStage, this, fzModel);
 	}
 	public void schreibeInDatei(String typ){
 		try{

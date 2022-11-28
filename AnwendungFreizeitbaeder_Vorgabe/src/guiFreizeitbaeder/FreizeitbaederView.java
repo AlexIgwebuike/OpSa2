@@ -1,4 +1,4 @@
-package gui;
+package guiFreizeitbaeder;
 
 import business.Freizeitbad;
 import javafx.event.ActionEvent;
@@ -17,10 +17,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ownUtil.MeldungsfensterAnzeiger;
+import ownUtil.Observer;
 import ownUtil.PlausiException;
 import business.*;
 
-public class FreizeitbaederView {
+public class FreizeitbaederView implements Observer {
 
 	private FreizeitbaederControl fzControl;
 	private FreizeitbaederModel fzModel;
@@ -111,7 +112,9 @@ public class FreizeitbaederView {
    }
 
     public FreizeitbaederView(Stage primaryStage,FreizeitbaederControl fzControl,FreizeitbaederModel fzModel){
-    	this.fzModel = fzModel;
+    	this.fzModel = fzModel.getInstance();
+    	this.fzModel.addObserver(this);
+    	
     	this.fzControl = fzControl;
     	Scene scene = new Scene(this.pane, 560, 340);
     	primaryStage.setScene(scene);
@@ -131,7 +134,7 @@ public class FreizeitbaederView {
 	    btnAnzeige.setOnAction(new EventHandler<ActionEvent>() {
 	    	@Override
 	        public void handle(ActionEvent e) {
-	            zeigeFreizeitbaederAn();
+	            update();
 	        } 
    	    });  
 	    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
@@ -170,7 +173,7 @@ public class FreizeitbaederView {
      	}
     }
 
-    private void zeigeFreizeitbaederAn(){
+    public void update(){
     	if(this.fzModel.getFreizeitbad()  != null){
     		txtAnzeige.setText(
     				this.fzModel.getFreizeitbad().gibFreizeitbadZurueck(' '));
