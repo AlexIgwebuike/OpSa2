@@ -20,7 +20,7 @@ public class SportstaettenView implements Observer{
 	private FreizeitbaederModel spModel;
 	private SportstaettenControl spControl;
 	
-	private Pane pane = new  Pane();
+	private Pane pane = new Pane();
 	private Label lblAnzeige = new Label("Anzeige Freizeitbaeder");
 	private Button btnAnzeige = new Button("Anzeige");
 	private TextArea txtAnzeige = new TextArea();
@@ -37,6 +37,19 @@ public class SportstaettenView implements Observer{
 	      	lblAnzeige.setFont(font);
 	       	lblAnzeige.setStyle("-fx-font-weight: bold;"); 
 	       	pane.getChildren().addAll(lblAnzeige);
+	       	
+	     // Textbereich	
+	        txtAnzeige.setEditable(false);
+	     	txtAnzeige.setLayoutX(310);
+	    	txtAnzeige.setLayoutY(90);
+	     	txtAnzeige.setPrefWidth(220);
+	    	txtAnzeige.setPrefHeight(185);
+	       	pane.getChildren().add(txtAnzeige); 
+	       	
+	       	btnAnzeige.setLayoutX(310);
+	        btnAnzeige.setLayoutY(290);
+	        pane.getChildren().addAll(btnAnzeige);
+
 	 }
 	 
 	 public SportstaettenView(Stage primaryStage,SportstaettenControl spControl, FreizeitbaederModel fzModel){
