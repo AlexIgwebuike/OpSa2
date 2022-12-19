@@ -3,6 +3,7 @@ package writers;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import business.Freizeitbad;
 
@@ -20,12 +21,15 @@ public class ConcreteTxtWriterProduct extends WriterProduct {
 	}
 	
 		
-	public void fuegeInDateiHinzu(Freizeitbad freizeitbad) throws IOException{
-		this.aus.write("Daten des Freizeitbades"
-					+ "\nName des Freizeitbads:              " + freizeitbad.getName()
-					+ "\nÖffnungszeit des Freizeitbads:       " + freizeitbad.getGeoeffnetVon() + " - " + freizeitbad.getGeoeffnetBis()
-					+ "\nBeckenlänge des Freizeitbads:        " + freizeitbad.getBeckenlaenge()
-					+ "\nWasasertemperatur des Freizeitbads:  " + freizeitbad.getTemperatur());
+	public void fuegeInDateiHinzu(ArrayList<Freizeitbad> freizeitbaeder) throws IOException{
+		for(Freizeitbad freizeitbad : freizeitbaeder) {
+			this.aus.write("Daten des Freizeitbades"
+						+ "\nName des Freizeitbads:              " + freizeitbad.getName()
+						+ "\nÖffnungszeit des Freizeitbads:       " + freizeitbad.getGeoeffnetVon() + " - " + freizeitbad.getGeoeffnetBis()
+						+ "\nBeckenlänge des Freizeitbads:        " + freizeitbad.getBeckenlaenge()
+						+ "\nWasasertemperatur des Freizeitbads:  " + freizeitbad.getTemperatur()
+						+ "\n");
+		}
 		schliesseDatei();
 	}
 		

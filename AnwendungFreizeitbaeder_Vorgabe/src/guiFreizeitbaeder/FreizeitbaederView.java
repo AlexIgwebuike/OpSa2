@@ -125,31 +125,10 @@ public class FreizeitbaederView implements Observer {
     }
 
     private void initListener() {
-	    btnEingabe.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-        	    nehmeFreizeitbadAuf();
-            }
-	    });
-	    btnAnzeige.setOnAction(new EventHandler<ActionEvent>() {
-	    	@Override
-	        public void handle(ActionEvent e) {
-	            update();
-	        } 
-   	    });  
-	    mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
-	    	public void handle(ActionEvent e) {
-	    		schreibeFreizeitbaederInDatei("csv");
-	    	}
-}
-	    	);
-	    	mnItmTxtExport.setOnAction(new EventHandler<ActionEvent>() {
-	    	public void handle(ActionEvent e) {
-	    	    schreibeFreizeitbaederInDatei("txt");
-	    	}}
-
-			);
-
+	    btnEingabe.setOnAction(e -> nehmeFreizeitbadAuf());
+	    btnAnzeige.setOnAction(e -> update());  
+	    mnItmCsvExport.setOnAction(e -> schreibeFreizeitbaederInDatei("csv"));
+	    mnItmTxtExport.setOnAction(e -> schreibeFreizeitbaederInDatei("txt"));
     }
 
     private void schreibeFreizeitbaederInDatei (String typ) {
@@ -160,7 +139,7 @@ public class FreizeitbaederView implements Observer {
 
     private void nehmeFreizeitbadAuf(){
     	try{
-    		this.fzModel.setFreizeitbad( new Freizeitbad(
+    		this.fzModel.addFreizeitbad( new Freizeitbad(
     			txtName.getText(), 
    	            txtGeoeffnetVon.getText(),
    	            txtGeoeffnetBis.getText(),
@@ -174,9 +153,14 @@ public class FreizeitbaederView implements Observer {
     }
 
     public void update(){
-    	if(this.fzModel.getFreizeitbad()  != null){
-    		txtAnzeige.setText(
-    				this.fzModel.getFreizeitbad().gibFreizeitbadZurueck(' '));
+    	if(fzModel.getFreizeitbaeder().size() > 0){
+    		StringBuffer text = new StringBuffer();
+    		
+    		for(Freizeitbad freizeitbad : this.fzModel.getFreizeitbaeder()) {
+    			text.append(freizeitbad.gibFreizeitbadZurueck(' ') + "\n");
+    		}
+    		
+    		this.txtAnzeige.setText(text.toString());
     	}
     	else{
     		zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");

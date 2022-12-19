@@ -3,6 +3,7 @@ package business;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import ownUtil.Observable;
@@ -15,7 +16,7 @@ import writers.WriterProduct;
 
 public class FreizeitbaederModel  implements Observable{
 
-	private Freizeitbad freizeitbad;
+	private ArrayList<Freizeitbad> freizeitbaeder = new ArrayList<>();
 	private static FreizeitbaederModel freizeitbadModel;
 	Vector<Observer> observer = new Vector<Observer>();
 	
@@ -30,26 +31,26 @@ public class FreizeitbaederModel  implements Observable{
 		return freizeitbadModel;
 	}
 
-	public Freizeitbad getFreizeitbad() {
-		return freizeitbad;
+	public ArrayList<Freizeitbad> getFreizeitbaeder() {
+		return freizeitbaeder;
 	}
 
-	public void setFreizeitbad(Freizeitbad freizeitbad) {
-		this.freizeitbad = freizeitbad;
+	public void addFreizeitbad(Freizeitbad freizeitbad) {
+		this.freizeitbaeder.add(freizeitbad);
 		notifyObserver();
 	}
 	
 	public void schreibeFreizeitbaederInCsvDatei() throws IOException{
 		WriterCreator creator = new ConcreteCsvWriterCreator();
 		WriterProduct writer = creator.factoryMethod();
-		writer.fuegeInDateiHinzu(this.freizeitbad);
+		writer.fuegeInDateiHinzu(this.freizeitbaeder);
 		writer.schliesseDatei();
 	}
 	
 	public void schreibeFreizeitbaederInTxtDatei() throws IOException{
 		WriterCreator creator = new ConcreteTxtWriterCreator();
 		WriterProduct writer = creator.factoryMethod();
-		writer.fuegeInDateiHinzu(this.freizeitbad);
+		writer.fuegeInDateiHinzu(this.freizeitbaeder);
 		writer.schliesseDatei();
 	}
 	

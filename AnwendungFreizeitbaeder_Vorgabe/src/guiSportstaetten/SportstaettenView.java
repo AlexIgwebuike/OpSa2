@@ -1,5 +1,6 @@
 package guiSportstaetten;
 
+import business.Freizeitbad;
 import business.FreizeitbaederModel;
 import guiFreizeitbaeder.FreizeitbaederControl;
 import javafx.event.ActionEvent;
@@ -74,14 +75,19 @@ public class SportstaettenView implements Observer{
 	    }
 	 
 		 public void update(){
-		    	if(this.spModel.getFreizeitbad()  != null){
-		    		txtAnzeige.setText(
-		    				this.spModel.getFreizeitbad().gibFreizeitbadZurueck(' '));
+			 if(spModel.getFreizeitbaeder().size() > 0){
+		    	StringBuffer text = new StringBuffer();
+		    		
+		    	for(Freizeitbad freizeitbad : this.spModel.getFreizeitbaeder()) {
+		    		text.append(freizeitbad.gibFreizeitbadZurueck(' ') + "\n");
 		    	}
-		    	else{
-		    		zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");
-		    	}
-		    }	
+		    		
+		    	this.txtAnzeige.setText(text.toString());
+		    }
+		    else{
+		    	zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");
+		    }
+		 }	
 		 
 		  void zeigeInformationsfensterAn(String meldung){
 		    new MeldungsfensterAnzeiger(AlertType.INFORMATION,
