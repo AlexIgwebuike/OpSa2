@@ -1,9 +1,6 @@
 package guiFreizeitbaeder;
 
 import business.Freizeitbad;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,11 +14,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ownUtil.MeldungsfensterAnzeiger;
-import ownUtil.Observer;
 import ownUtil.PlausiException;
 import business.*;
 
-public class FreizeitbaederView implements Observer {
+public class FreizeitbaederView {
 
 	private FreizeitbaederControl fzControl;
 	private FreizeitbaederModel fzModel;
@@ -111,11 +107,9 @@ public class FreizeitbaederView implements Observer {
  	    pane.getChildren().add(mnbrMenuLeiste);
    }
 
-    public FreizeitbaederView(Stage primaryStage,FreizeitbaederControl fzControl,FreizeitbaederModel fzModel){
-    	this.fzModel = fzModel.getInstance();
-    	this.fzModel.addObserver(this);
-    	
+    public FreizeitbaederView(Stage primaryStage,FreizeitbaederControl fzControl, FreizeitbaederModel fzModel){
     	this.fzControl = fzControl;
+    	this.fzModel = fzModel;
     	Scene scene = new Scene(this.pane, 560, 340);
     	primaryStage.setScene(scene);
     	primaryStage.setTitle("Verwaltung von Freizeitbädern");
@@ -126,7 +120,7 @@ public class FreizeitbaederView implements Observer {
 
     private void initListener() {
 	    btnEingabe.setOnAction(e -> nehmeFreizeitbadAuf());
-	    btnAnzeige.setOnAction(e -> update());  
+	    btnAnzeige.setOnAction(e -> zeigFreizeitbaederAn());  
 	    mnItmCsvExport.setOnAction(e -> schreibeFreizeitbaederInDatei("csv"));
 	    mnItmTxtExport.setOnAction(e -> schreibeFreizeitbaederInDatei("txt"));
     }
@@ -152,7 +146,7 @@ public class FreizeitbaederView implements Observer {
      	}
     }
 
-    public void update(){
+    public void zeigFreizeitbaederAn(){
     	if(fzModel.getFreizeitbaeder().size() > 0){
     		StringBuffer text = new StringBuffer();
     		

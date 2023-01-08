@@ -4,16 +4,17 @@ import java.io.IOException;
 
 import business.FreizeitbaederModel;
 import javafx.stage.Stage;
+import ownUtil.Observer;
 
-public class FreizeitbaederControl {
+public class FreizeitbaederControl implements Observer{
 
 	private FreizeitbaederView fzView;
 	private FreizeitbaederModel fzModel;
 
 	public FreizeitbaederControl(Stage primaryStage){
-		
-		this.fzModel = fzModel.getInstance();
+		this.fzModel = FreizeitbaederModel.getInstance();
 		this.fzView = new FreizeitbaederView(primaryStage, this, fzModel);
+		this.fzModel.addObserver(this);
 	}
 	public void schreibeInDatei(String typ){
 		try{
@@ -38,6 +39,10 @@ public class FreizeitbaederControl {
 		catch(Exception exc){
 			this.fzView.zeigeFehlermeldungsfensterAn(typ, "Unbekannter fehler beim Speichern");
 		}
+	}
+	
+	public void update() {
+		this.fzView.zeigFreizeitbaederAn();
 	}
 
 

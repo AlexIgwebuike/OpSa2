@@ -1,7 +1,5 @@
 package business;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -9,12 +7,11 @@ import java.util.Vector;
 import ownUtil.Observable;
 import ownUtil.Observer;
 import writers.ConcreteCsvWriterCreator;
-import writers.ConcreteCsvWriterProduct;
 import writers.ConcreteTxtWriterCreator;
 import writers.WriterCreator;
 import writers.WriterProduct;
 
-public class FreizeitbaederModel  implements Observable{
+public class FreizeitbaederModel implements Observable{
 
 	private ArrayList<Freizeitbad> freizeitbaeder = new ArrayList<>();
 	private static FreizeitbaederModel freizeitbadModel;

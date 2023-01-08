@@ -2,9 +2,6 @@ package guiSportstaetten;
 
 import business.Freizeitbad;
 import business.FreizeitbaederModel;
-import guiFreizeitbaeder.FreizeitbaederControl;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,9 +11,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ownUtil.MeldungsfensterAnzeiger;
-import ownUtil.Observer;
 
-public class SportstaettenView implements Observer{
+public class SportstaettenView{
 	
 	private FreizeitbaederModel spModel;
 	private SportstaettenControl spControl;
@@ -54,9 +50,8 @@ public class SportstaettenView implements Observer{
 	 }
 	 
 	 public SportstaettenView(Stage primaryStage,SportstaettenControl spControl, FreizeitbaederModel fzModel){
-	    	this.spModel = spModel.getInstance();
 	    	this.spControl = spControl;
-	    	this.spModel.addObserver(this);
+	    	this.spModel = fzModel;
 	    	Scene scene = new Scene(this.pane, 560, 340);
 	    	primaryStage.setScene(scene);
 	    	primaryStage.setTitle("Anzeige von Sportstaetten");
@@ -66,15 +61,10 @@ public class SportstaettenView implements Observer{
 	    }
 	 
 	 private void initListener() {
-		    btnAnzeige.setOnAction(new EventHandler<ActionEvent>() {
-		    	@Override
-		        public void handle(ActionEvent e) {
-		            update();
-		        } 
-	   	    });  
-	    }
+		 btnAnzeige.setOnAction(e -> zeigFreizeitbaederAn());
+	 } 
 	 
-		 public void update(){
+		 public void zeigFreizeitbaederAn(){
 			 if(spModel.getFreizeitbaeder().size() > 0){
 		    	StringBuffer text = new StringBuffer();
 		    		
